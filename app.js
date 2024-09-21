@@ -2,13 +2,19 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 
 const app = express();
+const JWT_SECRET = 'your_jwt_secret';
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to local MongoDB
 mongoose.connect('mongodb://localhost:27017/')
@@ -26,14 +32,30 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Root route
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+//Middleware to protect routes
+const authMiddleware = (req, res, next) => {
+    const token = req.cookies.token;
+    console.log('Token:', token);
+    if (!token) {
+        return res.status(401).redirect('/login.html'); // Redirect to login if no token
+    }
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.user = decoded; // Attach decoded token data to request object
+        next();
+    } catch (err) {
+        console.error(err);
+        return res.status(403).redirect('/login.html'); // Token is invalid or expired
+    }
+};
 // Signup route
 app.post('/auth/signup', async (req, res) => {
     const { name, email, password, phone, gender } = req.body;
@@ -78,13 +100,22 @@ app.post('/auth/login', async (req, res) => {
             return res.status(400).redirect('/invalidcredentials.html');
         }
 
-        return res.status(200).send("Login successful");
+        const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, secure: false }).status(200).send("Login successful");
     } catch (err) {
         console.error(err);
         res.status(500).redirect('/servererror.html');
     }
 });
+// Protected route for books.html
+app.get('/books.html', authMiddleware, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'books.html'));
+});
 
+// Logout route
+app.get('/auth/logout', (req, res) => {
+    res.clearCookie('token').redirect('/login.html'); // Clear the token cookie and redirect to login
+});
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -62,8 +62,10 @@
                         <li class="nav-item">
                             <a href="index.html" class="nav-link">Home</a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="map.html" class="nav-link">Map</a>
+                            <a href="#" class="nav-link signout-link" onclick="logout()"><i class="fas fa-right-from-bracket"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -120,6 +122,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script>
+            function logout() {
+                window.location.href = '/auth/logout'; // Trigger the logout and redirect to login
+            }
+        </script>
     </main>
     </body>
     </html>

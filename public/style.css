@@ -151,3 +151,7 @@ select option {
     background-color: #40916c;
     color: white;
 }
+
+li::marker{
+    content:none;
+}
