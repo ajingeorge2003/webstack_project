@@ -1,5 +1,5 @@
 .searchbar {
-    background-color: beige;
+    background-color: #fafafa;
     width: 100%;
     max-width: 600px;
     padding: 10px 20px;
@@ -39,7 +39,7 @@ input::placeholder{
     margin: 0 auto;
 }
 .book-item {
-    background-color: beige;
+    background-color: rgb(234, 234, 234);
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);

@@ -41,7 +41,7 @@ app.post('/auth/signup', async (req, res) => {
     try {
         const userExists = await User.findOne({ email });
         if (userExists) {
-            return res.status(400).redirect('/userexixts.html');
+            return (res.status(400).send("User already Exists!! Please Signup again"))
         }
 
         const salt = await bcrypt.genSalt(10);
@@ -56,7 +56,7 @@ app.post('/auth/signup', async (req, res) => {
         });
 
         await newUser.save();
-        res.status(200).redirect('/login.html');
+        return res.status(200).send("Signup successful!! Please login to continue");;
     } catch (err) {
         console.error(err);
         res.status(500).redirect('/servererror.html');
@@ -78,7 +78,7 @@ app.post('/auth/login', async (req, res) => {
             return res.status(400).redirect('/invalidcredentials.html');
         }
 
-        res.status(200).redirect('/books.html');
+        return res.status(200).send("Login successful");
     } catch (err) {
         console.error(err);
         res.status(500).redirect('/servererror.html');

@@ -24,33 +24,6 @@
         }
 
     </style>
-    <script>
-        document.getElementById('signupForm').addEventListener('submit', async function(event) {
-
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
-
-    try {
-        const response = await fetch('/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
-
-        // Assuming the server sends a success message or error message
-        const responseText = await response.text();
-
-        // Show the response in an alert, whether it's an error or success message
-        alert(responseText);
-    } catch (error) {
-        alert("An error occurred: " + error.message); // Catch any network errors
-    }
-});
-
-
-    </script>
 </head>
 
 <body class="bg-gray-100 text-gray-800">
