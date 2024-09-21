@@ -1,0 +1,153 @@
+.searchbar {
+    background-color: beige;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 50px;
+    margin: 20px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+input::placeholder{
+    text-align: center;
+}
+.containersearch {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 20px; 
+}
+.searchbar:hover {
+    border-color: #535358;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    outline: none;
+}
+.containerlist {
+    display: flex;
+    /* flex-wrap: wrap; */
+    gap: 20px;
+    justify-content: center;
+}
+#book-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 140px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.book-item {
+    background-color: beige;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s;
+}
+.book-item h3 {
+    color:#555;
+    margin: 0;
+    font-size: 18px;
+}
+.book-item p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+.book-item:hover{
+    transform: scale(1.02);
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+#pagination .page-item {
+    list-style: none;
+    margin: 0 5px;
+}
+
+#pagination .page-link {
+    display: block;
+    padding: 10px 15px;
+    background-color: beige;
+    color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#pagination .page-link:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+#pagination .page-item.active .page-link {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+#pagination .page-item.disabled .page-link {
+    background-color: #e9ecef;
+    color: #6c757d;
+    pointer-events: none;
+}
+#genre-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: beige;
+    cursor: pointer;
+}
+
+#genre-select:hover {
+    outline: none;
+    border-color: #007bff;
+}
+
+select option {
+    padding: 10px;
+}
+.option{
+    padding-top: 19px;
+    padding-right: 20px;
+}
+
+/* Style for login and signup links */
+.navbar-nav .nav-item .login-link, 
+.navbar-nav .nav-item .signup-link {
+    display: flex;
+    align-items: center;
+    padding: 5px 15px;
+    color: #ffffff;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.navbar-nav .nav-item .login-link i,
+.navbar-nav .nav-item .signup-link i {
+    margin-right: 8px;
+}
+
+.navbar-nav .nav-item .login-link:hover {
+    background-color: #2d6a4f;
+}
+
+.navbar-nav .nav-item .signup-link {
+    background-color: #52b788;
+    color: white;
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-item .signup-link:hover {
+    background-color: #40916c;
+    color: white;
+}
